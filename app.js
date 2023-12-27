@@ -22,7 +22,8 @@ const Header = () => {
 }
 
 const RestaurantCard = (props) => {
-  console.log("props info:", props?.resData[0].data.name)
+  // console.log("props info:", props?.resData[0].info.name)
+  // console.log(RestaurantCard )
   const { resData } = props;
 
   const {cloudinaryImageId,
@@ -31,18 +32,20 @@ const RestaurantCard = (props) => {
     cuisines,
     costForTwo,
     deliveryTime,
-  }=resData?.info;
+  } =resData?.info;
   return (
     <div className="res-card" style={{ backgroundColor: '#f0f0f0' }}>
-      <img className="res-logo" alt="res-logo" src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/xqwpuhgnsaf18te7zvtv" + cloudinaryImageId} />
+      <img className="res-logo"  src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/xqwpuhgnsaf18te7zvtv" + cloudinaryImageId} />
       <h3>{name}</h3>
-      <h3>{cuisines}</h3> 
+      <h3>{cuisines.join(",")}</h3> 
       <h3>{avgRating}stars</h3>
-      <h4>{costForTwo / 100} For Two</h4>
+      <h4>{costForTwo/100} For Two</h4>
       <h4>{deliveryTime} minutes</h4>
     </div>
   )
 }
+
+//media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/xqwpuhgnsaf18te7zvtv" + cloudinaryImageId} 
 
 
 
@@ -3745,17 +3748,18 @@ const resList = [
 
 
 ];
-
+//https://www.swiggy.com/dapi/restaurants/list/v5?lat=12.9351929&lng=77.62448069999999&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING
 //not using  keys (not acceptable)
 const Body = () => {
-  console.log("resObj", resObj)
+  // console.log("resObj", resObj)
+  // console.log(RestaurantCard )
   return (
     <div className="body">
       <div className="search">search</div>
       <div className="res-container">
         {
-          resList.map((restaurant)=>{
-            <RestaurantCard  key={restaurant.data.id}resData={restaurant}/>
+          resList?.map((restaurant)=>{
+            return <RestaurantCard  key={restaurant?.info?.id}resData={restaurant}/>
           })
         }
       </div>
